@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&display=swap");
+
+.profile-wrapper {
+  width: 100%;
+  display: flex;
+  font-family: "Montserrat", sans-serif;
+}
+
+h2 {
+  font-weight: 800;
+  font-size: 28px;
+}
+
+h3 {
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.profile-form-wrapper,
+.profile-avatar-wrapper {
+  width: 50vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-form-wrapper {
+  padding: 110px 20px 20px 20px;
+}
+
+.profile-form-inner-wrapper {
+  width: 60%;
+}
+
+.names:nth-child(1) {
+  margin-right: 2%;
+}
+
+input[type="text"] {
+  border-style: none;
+  border-bottom: 2px solid grey;
+  margin-bottom: 10%;
+}
+
+input:focus {
+  border-style: none;
+}
+
+input[type="text" i] {
+  font-size: 10px;
+  font-weight: bold;
+  color: #919191;
+}
+
+.names {
+  width: 47.5%;
+}
+
+.long-inputs {
+  width: 100%;
+}
+
+/* PICTURE SIDE WRAPPER */
+
+.profile-avatar-wrapper {
+  background: #f1efff;
+  display: flex;
+  padding: 110px 20px 20px 110px;
+  align-items: flex-start;
+}
+
+.profile-img-wrapper {
+  display: flex;
+  align-items: left;
+}
+
+.profile-avatar-main-wrapper {
+  text-align: left;
+}
+
+.profile-avatar-rest-wrapper {
+  width: 200px;
+}
+
+.avatar-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  border: 2px solid #eea668;
+  margin: 2px;
+}
+.avatar-img:active {
+  border: 3px solid #000aff;
+}
+
+.avatar-main-img {
+  width: 180px;
+  height: auto;
+  border-radius: 200px;
+  border: 2px solid #eea668;
+  margin-right: 20px;
+}
