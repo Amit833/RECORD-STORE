@@ -38,7 +38,7 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use("/images", express.static("images"));
+app.use("/public", express.static("/public"));
 
 /**ROUTES */
 app.use("/users", usersRouter);

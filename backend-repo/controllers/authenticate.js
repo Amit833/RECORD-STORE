@@ -22,7 +22,8 @@ exports.login = async (req, res, next) => {
     res
       .cookie("token", token, {
         expires: new Date(Date.now() + 604800000),
-        secure: false, //not https (http)
+        sameSite: process.env.NODE_ENV == "production" ? "None" : "lax",
+        secure: process.env.NODE_ENV == "production" ? true : false, //http on localhost, https on production
         httpOnly: true,
       })
       .json(userFound);
