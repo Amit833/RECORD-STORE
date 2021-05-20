@@ -7,6 +7,7 @@ export const myContext = createContext();
 export const UserContextProvider = (props) => {
   const [signup, setSignup] = useState([]);
   const [loginUser, setloginUser] = useState(loadUserFromStorage());
+  const [records, setRecords] = useState([]);
 
   const [userStatus, setUserStatus] = useState(false);
   const [error, setError] = useState(false);
@@ -15,9 +16,9 @@ export const UserContextProvider = (props) => {
   const [authIsDone, setAuthIsDone] = useState(false);
 
   const [cart, setCart] = useState({ records: [], totalPrice: 0 });
-  const [records, setRecords] = useState([]);
   const [orders, setOrders] = useState([]);
   const [cartCounter, setCartCounter] = useState();
+  const [totalQuantity, setTotalQuantity] = useState();
 
   //last thing to get executed (after all components have been rendered already)
   useEffect(() => {
@@ -66,6 +67,8 @@ export const UserContextProvider = (props) => {
         setOrders,
         cartCounter,
         setCartCounter,
+        totalQuantity,
+        setTotalQuantity,
       }}
     >
       {props.children}

@@ -1,17 +1,18 @@
 import React, { useContext } from "react";
 import { myContext } from "../context/myContext";
 import { useParams, useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { HiShoppingCart } from 'react-icons/hi';
+import { Link, NavLink } from "react-router-dom";
 import { logoutUser } from "../helpers/apiCall"
-import { clearUserInStorage } from "../helpers/localStorage"
+import { clearUserInStorage, setUserInStorage } from "../helpers/localStorage"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 import "../css/nav.css";
 
 
 const Nav = () => {
   const context = useContext(myContext);
-  const { userStatus, loginUser, setloginUser, setUserStatus } = context;
+  const { userStatus, loginUser, setloginUser, setUserStatus, cartCounter, totalQuantity } = context;
   console.log("loginuser", loginUser);
   let { id } = useParams();
   const history = useHistory();
@@ -36,6 +37,7 @@ const Nav = () => {
         <Link to="/store">
           <h1>Record Store</h1>
         </Link>
+
       </div>
       {!userStatus && (
         <div className="btn-wrapper">
@@ -46,10 +48,7 @@ const Nav = () => {
           <Link to="/signup">
             <button className="nav-btn">Sign up</button>
           </Link>
-          <button>
 
-            <HiShoppingCart />
-          </button>
         </div>
       )}
       {userStatus && (
@@ -62,9 +61,23 @@ const Nav = () => {
             />
           </div>
 
+
           <div onClick={triggerLogout}>
             <button className="nav-btn">Logout</button>
           </div>
+
+
+
+
+          <NavLink activeClassName='selected' exact to='/cart'>
+            {totalQuantity && (
+
+              <div className='cnt' data-content={totalQuantity}>
+                {/* <p>{totalQuantity}</p> */}
+              </div>
+            )}
+            <FontAwesomeIcon icon={faShoppingCart} />
+          </NavLink>
         </>
       )}
     </div>

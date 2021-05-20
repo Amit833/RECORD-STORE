@@ -1,6 +1,9 @@
 import axios from "axios";
-axios.defaults.baseURL = `http://localhost:8080`; // set our API server url const serverUrl = `http://localhost:8080`;so I don't need to write  const logIndata = await axios.post(`${serverUrl}/login`, data);
+axios.defaults.baseURL =
+  `http://localhost:8080` || process.env.REACT_APP_API_URI; // set our API server url const serverUrl = `http://localhost:8080`;so I don't need to write  const logIndata = await axios.post(`${serverUrl}/login`, data);
 axios.defaults.withCredentials = true;
+
+console.log(axios.defaults.baseURL);
 
 const extractApiError = (errAxios) => {
   return errAxios.response
@@ -73,4 +76,18 @@ export const addOrders = async (orderData) => {
   } catch (error) {
     return extractApiError(error);
   }
+};
+
+export const sendPaymentInfo = async (data) => {
+  try {
+    const paymentdata = await axios.post(`/payment`, data);
+    return paymentdata;
+  } catch (error) {
+    return extractApiError(error);
+  }
+};
+
+export const sendOrder = async (data, id) => {
+  const res = await axios.post(`/users/${id}/orders`, data);
+  return res.data;
 };
