@@ -37,17 +37,7 @@ const Stripe = () => {
 
         await sendPaymentInfo(headers, body)
 
-        // return fetch(`http://localhost:8080/payment`, {
-        //     method: "POST",
-        //     headers,
-        //     body: JSON.stringify(body)
-        // })
-        //     .then(response => {
-        //         console.log('RESPONSE', response);
-        //         const { status } = response;
-        //         console.log('STATUS', status);
-        //     })
-        //     .catch(error => console.log(error))
+        
     }
 
     return (
@@ -60,7 +50,7 @@ const Stripe = () => {
                 shippingAddress
                 billingAddress
             >
-                {/* <button>price: {product.price} </button> */}
+               
                 <button>BUY NOW</button>
             </StripeCheckout>
         </>
