@@ -81,7 +81,7 @@ const Cart = () => {
                         </div>
                     </>
                 )}
-                {/* <OrderHistory></OrderHistory> */}
+               
             </section>
         </div>
     );
