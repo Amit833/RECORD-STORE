@@ -10,7 +10,11 @@ const UserSchema = new Schema(
     nickName: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    avatar: { type: String, required: false, default: "/images/avatar1.jpg" },
+    avatar: {
+      type: String,
+      required: false,
+      default: "/images/avatar1.jpg",
+    },
   },
   {
     versionKey: false,
@@ -18,6 +22,7 @@ const UserSchema = new Schema(
     toJSON: { virtuals: true },
   }
 );
+
 // password hashing
 
 UserSchema.pre("save", async function (next) {

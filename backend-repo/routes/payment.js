@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { auth } = require("../middleware/authentication");
-const { logout } = require("../controllers/authenticate");
+const { payment } = require("../controllers/paymentController");
 
-router.route("/").get(auth, logout);
+router.route("/").get( payment);
 
 module.exports = router;

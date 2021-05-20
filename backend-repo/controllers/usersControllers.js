@@ -55,6 +55,7 @@ exports.deleteUser = async (req, res, next) => {
   }
 };
 
+// this is for me router
 exports.authUser = (req, res) => {
   res.json(req.user); // inside the req.user we have token
 };

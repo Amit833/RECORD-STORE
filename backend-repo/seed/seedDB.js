@@ -61,6 +61,7 @@ require("dotenv").config();
         title: faker.random.words(),
         artist: faker.random.words(),
         year: faker.date.past(),
+        price: faker.finance.amount(9, 40),
       };
       console.log(`${recordData.title} has been created`);
       const record = new Record(recordData);
