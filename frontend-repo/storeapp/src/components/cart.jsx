@@ -90,12 +90,3 @@ const Cart = () => {
 export default Cart;
 
 
-// {
-//     <NavLink to="/stripe">
-
-//     <button className='main-button' >
-//         {/* onClick={createOrder} */}
-//                                         BUY NOW
-//                                     </button>
-// </NavLink>
-// }
