@@ -5,7 +5,7 @@ const faker = require("faker");
 require("dotenv").config();
 
 (async function () {
-  const strConn = process.env.DB_CONNECTION;
+  const strConn = process.env.DB_CONNECTION_DEV;
   mongoose.connect(strConn, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

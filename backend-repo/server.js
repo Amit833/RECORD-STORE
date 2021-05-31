@@ -1,35 +1,25 @@
 require("dotenv").config();
+const morgan = require("morgan");
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8080;
 const cors = require("cors");
-// const stripe = require("stripe")(process.env.STRIPE_SECRET)
 
 const recordsRouter = require("./routes/recordsRouter");
 const usersRouter = require("./routes/usersRouter");
 const authRouter = require("./routes/authRouter");
 const logoutRouter = require("./routes/logout");
 const meRouter = require("./routes/meRouter");
-const paymentRouter = require("./routes/payment.js");
-const orderRouter = require("./routes/orderRouter");
+const paymentRouter = require("./routes/payment");
+const mailRouter = require("./routes/mailRouter");
 const path = require("path");
+// connect to MongoDB
+require("./helpers/db-connection");
 
-const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
-// Connect to DBongodb
-const strConn = process.env.DB_CONNECTION;
-mongoose
-  .connect(strConn, {
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  })
-  .then(() => console.log("Connection to cloud database established!"))
-  .catch((err) => console.log("[ERROR] DB connection failed", err));
 
 /**EXPRESS MIDDLEWARE */
 app.use(express.json());
@@ -41,6 +31,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use("/images", express.static("./images"));
+app.use(morgan("dev"));
 
 /**ROUTES */
 app.use("/users", usersRouter);
@@ -49,7 +40,7 @@ app.use("/login", authRouter);
 app.use("/logout", logoutRouter);
 app.use("/me", meRouter);
 app.use("/payment", paymentRouter);
-app.use("/orders", orderRouter);
+app.use("/sendmail", mailRouter);
 
 // Error Handling
 app.use(function errorHandler(err, req, res, next) {

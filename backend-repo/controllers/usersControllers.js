@@ -36,7 +36,18 @@ exports.addUser = async (req, res, next) => {
   const info = req.body;
   try {
     const user = await User.create(info);
-    res.send(user);
+
+    // Generate a token
+    const token = user.generateAuthToken();
+
+    res
+      .cookie("token", token, {
+        expires: new Date(Date.now() + 604800000),
+        sameSite: process.env.NODE_ENV == "production" ? "None" : "lax",
+        secure: process.env.NODE_ENV == "production" ? true : false, //http on localhost, https on production
+        httpOnly: true,
+      })
+      .send(user);
   } catch (err) {
     next(err);
   }

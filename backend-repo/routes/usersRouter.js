@@ -10,8 +10,14 @@ const {
   deleteUser,
 } = require("../controllers/usersControllers");
 
-router.route("/").get(getUsers).post(validateSchema, addUser);
+const { addOrder, getOrder } = require("../controllers/orderController");
 
+//users
+router.route("/").get(getUsers).post(validateSchema, addUser);
 router.route("/:id").get(getUser).put(updateUser).delete(deleteUser);
+
+// orders
+router.route("/:id/orders").post(addOrder);
+router.route("/:id/orders").get(getOrder);
 
 module.exports = router;

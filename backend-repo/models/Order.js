@@ -14,6 +14,7 @@ const OrderSchema = new Schema({
     ref: "User",
   },
   records: [OrderItemSchema], // nest order items
+  totalAmount: { type: Number },
 });
 
 const Order = model("Order", OrderSchema);
