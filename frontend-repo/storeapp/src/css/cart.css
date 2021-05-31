@@ -1,3 +1,6 @@
+.cart {
+  width: 100%;
+}
 .current-order {
   display: flex;
 }
@@ -31,6 +34,7 @@ img {
 .info {
   color: white;
   padding: 1rem;
+  text-align: start;
 }
 
 .right {
@@ -39,7 +43,7 @@ img {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  text-align: center;
+
   background: black;
   margin-bottom: 10px;
   margin-left: 10px;
@@ -52,4 +56,10 @@ img {
 
 .total {
   color: white;
+}
+
+.buy-but {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

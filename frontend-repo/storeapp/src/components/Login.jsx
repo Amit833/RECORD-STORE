@@ -4,7 +4,7 @@ import logIn from "../images/logIn.png";
 import { addLoginData } from "../helpers/apiCall";
 import { useHistory } from "react-router-dom";
 import { myContext } from "../context/myContext";
-import { setUserInStorage } from "../helpers/localStorage"
+import { setUserInStorage } from "../helpers/localStorage";
 import "../css/form.css";
 
 const Login = () => {
@@ -25,13 +25,12 @@ const Login = () => {
 
     if (newData.error) {
       setError(true);
-    } else {
-      console.log("newdata.data", newData.data);
-      setloginUser(newData.data);
-      setUserInStorage(newData.data)
-      setUserStatus(true);
-      history.push("/store");
+      return;
     }
+    setloginUser(newData.data);
+    setUserInStorage(newData.data);
+    setUserStatus(true);
+    history.push("/store");
   };
 
   return (

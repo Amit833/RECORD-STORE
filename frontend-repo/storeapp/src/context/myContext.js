@@ -15,7 +15,7 @@ export const UserContextProvider = (props) => {
 
   const [authIsDone, setAuthIsDone] = useState(false);
 
-  const [cart, setCart] = useState({ records: [], totalPrice: 0 });
+  const [cart, setCart] = useState({ records: [], totalAmount: 0 });
   const [orders, setOrders] = useState([]);
   const [cartCounter, setCartCounter] = useState();
   const [totalQuantity, setTotalQuantity] = useState();

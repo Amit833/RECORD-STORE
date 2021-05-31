@@ -1,71 +1,77 @@
-
-import { useContext, useState } from 'react';
+import { useContext } from "react";
 import { myContext } from "../context/myContext";
-import StripeCheckout from "react-stripe-checkout"
-import { sendPaymentInfo } from "../helpers/apiCall";
-
-
-
+import StripeCheckout from "react-stripe-checkout";
+import {
+  sendPaymentInfo,
+  sendOrder,
+  sendPaymentInfoToMail,
+} from "../helpers/apiCall";
+import { useHistory } from "react-router-dom";
 
 const Stripe = () => {
-    const {
-        cart,
-        user,
-        orders,
-        setCart,
-        setOrders,
-        cartCounter,
-        setCartCounter,
-        setTotalQuantity
-    } = useContext(myContext);
+  const history = useHistory();
+  const {
+    cart,
+    loginUser,
+    orders,
+    setCart,
+    setOrders,
+    cartCounter,
+    setCartCounter,
+    setTotalQuantity,
+  } = useContext(myContext);
 
-    const [product, setProduct] = useState({
-        name: "test product",
-        price: 2000,
-        produceBy: 'amllllllllllll'
-    })
+  const makePayment = async (token) => {
+    const body = {
+      token,
+      cart,
+    };
 
-    const makePayment = async (token) => {
-        const body = {
-            token,
-            product
-        }
+    let order = await sendOrder(
+      { ...cart, ...{ userId: loginUser._id } },
+      loginUser._id
+    );
+    if (!order.error) {
+      setCart({ records: [], totalAmount: 0 });
 
-        const headers = {
-            'Content_Type': 'application/json'
-        }
+      setOrders([...[order], ...orders]);
 
-        await sendPaymentInfo(headers, body)
+      let info = await sendPaymentInfo({
+        order: order._id,
+        amount: cart.totalAmount,
+        name: token.card.name,
+        email: token.email,
+        shippingAddress: token.card.address_city,
+      });
 
-        // return fetch(`http://localhost:8080/payment`, {
-        //     method: "POST",
-        //     headers,
-        //     body: JSON.stringify(body)
-        // })
-        //     .then(response => {
-        //         console.log('RESPONSE', response);
-        //         const { status } = response;
-        //         console.log('STATUS', status);
-        //     })
-        //     .catch(error => console.log(error))
+      // this for confirmation email
+      const mailInfo = await sendPaymentInfoToMail({
+        email: token.email,
+        amount: cart.totalAmount,
+        name: token.card.name,
+        address: token.card.address_line1,
+        zip: token.card.address_zip,
+        city: token.card.address_city,
+        country: token.card.address_country,
+      });
+      history.push("/checkout");
+      setCartCounter();
     }
+  };
 
-    return (
-        <>
-            <h1>you can pay here!</h1>
-            <StripeCheckout
-                stripeKey={"pk_test_51IsllTFfKkG9FeO926QuMVUXSgkarifHFFBT86IvcSvLdttIaFJ1bYbGIl0Pwgr0dYbCJ4ydc6J9CSiF8pgmJYZs00YnmJTDkU"}
-                token={makePayment}
-                name="Pay Now"
-                shippingAddress
-                billingAddress
-            >
-                {/* <button>price: {product.price} </button> */}
-                <button>BUY NOW</button>
-            </StripeCheckout>
-        </>
-    )
-}
-
+  return (
+    <>
+      <StripeCheckout
+        stripeKey={process.env.REACT_APP_STRIPE_KEY}
+        token={makePayment}
+        name="Pay Now"
+        shippingAddress
+        billingAddress
+      >
+        <button className="buyNow-btn"> Buy Now</button>
+      </StripeCheckout>
+    </>
+  );
+};
 
 export default Stripe;

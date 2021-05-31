@@ -33,7 +33,7 @@ export const addLoginData = async (data) => {
 export const addSignupData = async (data) => {
   try {
     const signupdata = await axios.post(`/users`, data);
-    return signupdata.data;
+    return signupdata;
   } catch (err) {
     return err.response.data;
   }
@@ -69,6 +69,7 @@ export const authenticateUser = async () => {
   }
 };
 
+// I think I don't need this function
 export const addOrders = async (orderData) => {
   try {
     const response = await axios.post("/orders", orderData);
@@ -78,16 +79,31 @@ export const addOrders = async (orderData) => {
   }
 };
 
-export const sendPaymentInfo = async (data) => {
+export const sendOrder = async (data, id) => {
+  const res = await axios.post(`/users/${id}/orders`, data);
+  return res.data;
+};
+
+// to payment router
+export const sendPaymentInfo = async (paymentData) => {
   try {
-    const paymentdata = await axios.post(`/payment`, data);
-    return paymentdata;
+    const res = await axios.post("/payment", paymentData);
+    return res.data;
   } catch (error) {
     return extractApiError(error);
   }
 };
 
-export const sendOrder = async (data, id) => {
-  const res = await axios.post(`/users/${id}/orders`, data);
-  return res.data;
+export const sendPaymentInfoToMail = async (paymentData) => {
+  try {
+    const res = await axios.post("/sendmail", paymentData);
+    return res.data;
+  } catch (error) {
+    return extractApiError(error);
+  }
 };
+
+// export const sendPaymentInfo = async (paymentData) => {
+//   const res = await axios.post(`/payment`, paymentData);
+//   return res.data;
+// };

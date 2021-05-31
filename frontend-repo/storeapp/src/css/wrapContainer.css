@@ -1,0 +1,7 @@
+.wrapContainer {
+  margin: 0 30px 30px 30px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

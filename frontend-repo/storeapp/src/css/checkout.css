@@ -1,0 +1,10 @@
+.checkout-img img {
+  box-shadow: none;
+  width: 300px;
+}
+
+.confirmation-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -24,6 +24,8 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 42px;
+  margin-right: 20px;
 }
 
 .profile-form-wrapper {

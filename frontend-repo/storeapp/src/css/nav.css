@@ -1,21 +1,35 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&display=swap");
 .nav-wrapper {
   font-family: "Montserrat", sans-serif;
-  height: 60px;
+  height: 70px;
   width: 100%;
   background: #f2f2f2 0% 0% no-repeat padding-box;
+}
+
+.icons-wrapper {
+  margin: 0 30px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
 .hero-wrapper {
   width: 45%;
-  margin-left: 10px;
 }
 
 h1 {
   font-size: 24px;
+  text-align: start;
+}
+
+a {
+  text-decoration: none;
+}
+
+.rightNav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .btn-wrapper {
@@ -34,8 +48,12 @@ h1 {
   background-color: white;
 }
 
+.avatar-wrapper {
+  height: 40px;
+}
+
 .avatar-link {
-  height: 55px;
+  height: 100%;
   width: auto;
   border-radius: 50%;
   border: solid 2px #eea668;
@@ -50,7 +68,7 @@ h1 {
   position: absolute;
   right: -12px;
   top: -8px;
-  background-color: tomato;
+  background-color: rgb(236, 119, 99);
   width: 15px;
   padding: 1px;
   border-radius: 50%;

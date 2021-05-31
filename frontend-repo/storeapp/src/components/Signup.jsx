@@ -5,20 +5,24 @@ import logIn from "../images/signUP.png";
 import { useHistory } from "react-router-dom";
 import { addSignupData } from "../helpers/apiCall";
 import "../css/signup.css";
+import { setUserInStorage } from "../helpers/localStorage";
 
 const Signup = () => {
   const context = useContext(myContext);
-  const { signup, setSignup } = context;
+  const { setSignup, setUserStatus, setError } = context;
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = async (data) => {
     const user = await addSignupData(data);
     if (user.error) {
-      console.log(user.error);
-      return
+      setError(true);
+      return;
     }
-    setSignup(user);
+
+    setSignup(user.data);
+    // setUserInStorage(user.data);
+    setUserStatus(true);
     history.push("/store");
   };
 
