@@ -70,7 +70,7 @@ export const RecordStore = () => {
                   <div className="record-info">
                     <img src={record.cover} />
                     <div className="plus-icon">
-                      <button className="price-btn"> ${record.price}</button>
+                      {/* <button className="price-btn"> ${record.price}</button> */}
 
                       <FontAwesomeIcon
                         icon={faPlus}

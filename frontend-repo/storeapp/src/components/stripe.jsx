@@ -44,7 +44,6 @@ const Stripe = () => {
         shippingAddress: token.card.address_city,
       });
 
-<<<<<<< HEAD
       // this for confirmation email
       const mailInfo = await sendPaymentInfoToMail({
         email: token.email,
@@ -57,13 +56,9 @@ const Stripe = () => {
       });
       history.push("/checkout");
       setCartCounter();
-=======
-        
->>>>>>> ba27331feb9636d7ae27745a6d7397e57e65a4e3
     }
   };
 
-<<<<<<< HEAD
   return (
     <>
       <StripeCheckout
@@ -78,24 +73,5 @@ const Stripe = () => {
     </>
   );
 };
-=======
-    return (
-        <>
-            <h1>you can pay here!</h1>
-            <StripeCheckout
-                stripeKey={"pk_test_51IsllTFfKkG9FeO926QuMVUXSgkarifHFFBT86IvcSvLdttIaFJ1bYbGIl0Pwgr0dYbCJ4ydc6J9CSiF8pgmJYZs00YnmJTDkU"}
-                token={makePayment}
-                name="Pay Now"
-                shippingAddress
-                billingAddress
-            >
-               
-                <button>BUY NOW</button>
-            </StripeCheckout>
-        </>
-    )
-}
-
->>>>>>> ba27331feb9636d7ae27745a6d7397e57e65a4e3
 
 export default Stripe;
