@@ -19,13 +19,13 @@ export const loadCartArrayFromStorage = () => {
 };
 
 export const loadUserCart = (userId) => {
-  const carts = this.loadCartArrayFromStorage();
+  const carts = loadCartArrayFromStorage();
   const userCart = carts.find((cart) => cart.userId === userId);
   return userCart;
 };
 
 export const setCartInStorage = (cart, userId) => {
-  const carts = this.loadCartArrayFromStorage();
+  const carts = loadCartArrayFromStorage();
   const userCart = carts.find((cart) => cart.userId === userId);
 
   !userCart ? carts.push({ ...cart, userId }) : Object.assign(userCart, cart); // we override the existing cart
@@ -33,7 +33,7 @@ export const setCartInStorage = (cart, userId) => {
 };
 
 export const deleteUserCart = (userId) => {
-  const carts = this.loadCartArrayFromStorage();
+  const carts = loadCartArrayFromStorage();
   const remainingCarts = carts.filter((cart) => cart.userId !== userId);
 
   localStorage.setItem("carts", JSON.stringify(remainingCarts));

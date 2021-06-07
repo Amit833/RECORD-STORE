@@ -3,7 +3,7 @@ import { myContext } from "../context/myContext";
 import { useParams, useHistory } from "react-router-dom";
 import { Link, NavLink } from "react-router-dom";
 import { logoutUser } from "../helpers/apiCall";
-import { clearUserInStorage } from "../helpers/localStorage.jsx";
+import { clearUserInStorage } from "../helpers/localStorage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
