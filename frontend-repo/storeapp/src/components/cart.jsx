@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { myContext } from "../context/myContext";
-import { Link, NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { sendOrder } from "../helpers/apiCall";
 import Stripe from "./stripe";
+import { deleteUserCart } from "../helpers/localStorage";
+
 import "../css/cart.css";
 
 const Cart = () => {
@@ -49,16 +51,15 @@ const Cart = () => {
 
       setOrders([...[order], ...orders]);
       setCartCounter();
+      // deleteUserCart();
     }
   };
-
-  console.log("cartCounter", cartCounter);
 
   return (
     <div className="cart">
       <section>
         <>
-          <h3>CART</h3>
+          <h3>YOUR COLLECTIONS</h3>
 
           <div className="current-order">
             <div className="left">
@@ -74,7 +75,6 @@ const Cart = () => {
                   {parseFloat(cart.totalAmount).toPrecision(4)} $
                 </p>
               </div>
-
               <Stripe />
             </div>
           </div>

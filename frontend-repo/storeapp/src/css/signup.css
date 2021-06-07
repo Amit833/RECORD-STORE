@@ -39,21 +39,24 @@ input[type="password"] {
   border-style: none;
   border-bottom: 2px solid grey;
   margin-bottom: 10%;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 input:focus {
   border-style: none;
 }
 
-input[type="text" i] {
-  font-size: 10px;
+/* input[type="text" i] {
+  font-size: 20px;
   font-weight: bold;
   color: #919191;
-}
+} */
 
 .signup-btn {
   padding: 6px 10px;
   margin: 10px;
   border: none;
   border-radius: 20px;
+  font-weight: bold;
 }

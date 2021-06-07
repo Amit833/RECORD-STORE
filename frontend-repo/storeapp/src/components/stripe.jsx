@@ -7,6 +7,7 @@ import {
   sendPaymentInfoToMail,
 } from "../helpers/apiCall";
 import { useHistory } from "react-router-dom";
+import { deleteUserCart } from "../helpers/localStorage";
 
 const Stripe = () => {
   const history = useHistory();
@@ -54,8 +55,10 @@ const Stripe = () => {
         city: token.card.address_city,
         country: token.card.address_country,
       });
+
       history.push("/checkout");
       setCartCounter();
+      deleteUserCart(loginUser._id);
     }
   };
 

@@ -4,7 +4,7 @@ import logIn from "../images/logIn.png";
 import { addLoginData } from "../helpers/apiCall";
 import { useHistory } from "react-router-dom";
 import { myContext } from "../context/myContext";
-import { setUserInStorage } from "../helpers/localStorage";
+import { loadUserCart, setUserInStorage } from "../helpers/localStorage";
 import "../css/form.css";
 
 const Login = () => {
@@ -14,10 +14,10 @@ const Login = () => {
   const {
     loginUser,
     setloginUser,
-    userStatus,
-    setUserStatus,
+
     error,
     setError,
+    updateCartState,
   } = context;
 
   const onSubmit = async (data) => {
@@ -27,9 +27,12 @@ const Login = () => {
       setError(true);
       return;
     }
+    console.log("newdataid", newData.data._id);
     setloginUser(newData.data);
     setUserInStorage(newData.data);
-    setUserStatus(true);
+    const cartTols = loadUserCart(newData.data._id); // i add the loginUser id to loadUserCart
+    cartTols && updateCartState(cartTols);
+
     history.push("/store");
   };
 
@@ -37,10 +40,9 @@ const Login = () => {
     <div className="login-wrapper">
       <div className="login-text-wrapper">
         <h2>Welcome back!!</h2>
-        {error && <h1 style={{ color: "red" }}>Login Error </h1>}
         <h3>Please fill in your credentials.</h3>
+        {error && <h1 style={{ color: "red" }}>Login Error </h1>}
         <form onSubmit={handleSubmit(onSubmit)} className="myForm">
-          <h1>Login</h1>
           <input
             type="text"
             name="email"
@@ -57,11 +59,14 @@ const Login = () => {
           {errors.password && <p>please provide your password!</p>}
 
           <button className="login-btn">Log in</button>
+          <p>You don’t have an account?</p>
           <div>
-            <p>
-              You don’t have an account? Create one{" "}
-              <a onClick={() => history.push("/signup")}>here</a>
-            </p>
+            <a
+              onClick={() => history.push("/signup")}
+              style={{ color: "blue ", cursor: "pointer" }}
+            >
+              Create New Account
+            </a>
           </div>
         </form>
       </div>

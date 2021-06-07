@@ -14,7 +14,6 @@ const extractApiError = (errAxios) => {
 export const logoutUser = async () => {
   try {
     const response = await axios.get("/logout");
-    console.log("Result: ", response.data);
     return response.data;
   } catch (err) {
     return extractApiError(err);
@@ -42,7 +41,6 @@ export const addSignupData = async (data) => {
 export const getRecordData = async () => {
   try {
     const recordData = await axios.get(`/records`);
-    console.log("recorddata:", recordData);
 
     return recordData.data;
   } catch (err) {
@@ -53,7 +51,6 @@ export const getRecordData = async () => {
 export const updateUserProfile = async (data, id) => {
   try {
     const updatedUser = await axios.put(`/users/${id}`, data);
-    console.log("updatedUser:", updatedUser);
     return updatedUser.data;
   } catch (err) {
     console.log(err);
@@ -69,19 +66,21 @@ export const authenticateUser = async () => {
   }
 };
 
-// I think I don't need this function
-export const addOrders = async (orderData) => {
-  try {
-    const response = await axios.post("/orders", orderData);
-    return response;
-  } catch (error) {
-    return extractApiError(error);
-  }
-};
-
+// send order
 export const sendOrder = async (data, id) => {
   const res = await axios.post(`/users/${id}/orders`, data);
   return res.data;
+};
+
+// get order
+export const getOrderData = async (id) => {
+  try {
+    const orderData = await axios.get(`users/${id}/orders`);
+
+    return orderData.data;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 // to payment router
@@ -102,8 +101,3 @@ export const sendPaymentInfoToMail = async (paymentData) => {
     return extractApiError(error);
   }
 };
-
-// export const sendPaymentInfo = async (paymentData) => {
-//   const res = await axios.post(`/payment`, paymentData);
-//   return res.data;
-// };

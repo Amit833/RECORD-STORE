@@ -9,7 +9,7 @@ import { setUserInStorage } from "../helpers/localStorage";
 
 const Signup = () => {
   const context = useContext(myContext);
-  const { setSignup, setUserStatus, setError } = context;
+  const { setError, setloginUser } = context;
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
 
@@ -20,9 +20,9 @@ const Signup = () => {
       return;
     }
 
-    setSignup(user.data);
-    // setUserInStorage(user.data);
-    setUserStatus(true);
+    // setSignup(user.data);
+    setloginUser(user.data);
+    setUserInStorage(user.data);
     history.push("/store");
   };
 
@@ -34,12 +34,14 @@ const Signup = () => {
           <h3>We won’t share you info with anybody. I promise.</h3>
           <form onSubmit={handleSubmit(onSubmit)} className="myForm">
             <input
+              id="firstName"
               type="text"
               name="firstName"
               ref={register({ required: true })}
               placeholder="First name"
             />
             <input
+              id="lastName"
               type="text"
               name="lastName"
               ref={register({ required: true })}
@@ -71,7 +73,7 @@ const Signup = () => {
               ref={register({ required: true })}
               placeholder="Repeat password"
             />
-            <button className="signup-btn">Create account</button>
+            <button className="signup-btn">sign Up</button>
           </form>
         </div>
 

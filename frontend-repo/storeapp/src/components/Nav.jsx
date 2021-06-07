@@ -3,7 +3,7 @@ import { myContext } from "../context/myContext";
 import { useParams, useHistory } from "react-router-dom";
 import { Link, NavLink } from "react-router-dom";
 import { logoutUser } from "../helpers/apiCall";
-import { clearUserInStorage, setUserInStorage } from "../helpers/localStorage";
+import { clearUserInStorage } from "../helpers/localStorage.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,12 +12,12 @@ import "../css/nav.css";
 const Nav = () => {
   const context = useContext(myContext);
   const {
-    userStatus,
     loginUser,
     setloginUser,
-    setUserStatus,
     cartCounter,
     totalQuantity,
+    setCartCounter,
+    setCart,
   } = context;
   let { id } = useParams();
   const history = useHistory();
@@ -30,8 +30,9 @@ const Nav = () => {
   const triggerLogout = () => {
     logoutUser();
     setloginUser();
-    setUserStatus(false);
     clearUserInStorage();
+    setCartCounter();
+    setCart({ records: [], totalAmount: 0 });
     history.push("/login");
   };
 

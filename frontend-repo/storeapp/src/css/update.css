@@ -51,17 +51,20 @@ input:focus {
 }
 
 input[type="text" i] {
-  font-size: 10px;
+  font-size: 16px;
   font-weight: bold;
   color: #919191;
 }
 
-.names {
-  width: 47.5%;
+.namesWrapper {
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 .long-inputs {
-  width: 100%;
+  width: 95%;
+  font-size: 16px;
 }
 
 /* PICTURE SIDE WRAPPER */

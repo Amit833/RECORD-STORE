@@ -47,20 +47,23 @@ const UpdateProfile = () => {
           {loginUser.nickName && <h2>Your profile, {loginUser.nickName}.</h2>}
           <h3>Don’t forget to click the save button Before you are gone!</h3>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <input
-              className="names"
-              type="text"
-              name="firstName"
-              ref={register({ required: true })}
-              defaultValue={loginUser.firstName}
-            />
-            <input
-              className="names"
-              type="text"
-              name="lastName"
-              ref={register({ required: true })}
-              defaultValue={loginUser.lastName}
-            />
+            <div className="namesWrapper">
+              <input
+                className="names"
+                type="text"
+                name="firstName"
+                ref={register({ required: true })}
+                defaultValue={loginUser.firstName}
+              />
+              <input
+                className="names"
+                type="text"
+                name="lastName"
+                ref={register({ required: true })}
+                defaultValue={loginUser.lastName}
+              />
+            </div>
+
             <input
               className="long-inputs"
               type="text"

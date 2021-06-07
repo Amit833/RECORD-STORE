@@ -20,10 +20,12 @@
 h1 {
   font-size: 24px;
   text-align: start;
+  color: #0c0b0b;
 }
 
 a {
   text-decoration: none;
+  color: #0c0b0b;
 }
 
 .rightNav-wrapper {
