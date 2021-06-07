@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
-const strConn = process.env.DB_CONNECTION_DEV;
+const env = require("../config/config");
+// const strConn = process.env.DB_CONNECTION_DEV;
 
 // Connect to DBongodb
 mongoose
-  .connect(strConn, {
+  .connect(env.db, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,

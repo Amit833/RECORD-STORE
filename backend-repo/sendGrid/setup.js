@@ -1,6 +1,7 @@
 const sgMail = require("@sendgrid/mail");
+const env = require("../config/config");
 
-sgMail.setApiKey(process.env.SEND_GRID_KEY);
+sgMail.setApiKey(env.send_grid_key);
 
 exports.sendVerificationEmail = async (mailData) => {
   const { email, amount, name, address, zip, city, country } = mailData;

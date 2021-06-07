@@ -2,6 +2,7 @@ const Order = require("../models/Order");
 
 exports.addOrder = async (req, res, next) => {
   const info = req.body;
+  console.log("info", info);
   try {
     let newOrder = await Order.create(info);
     res.json(newOrder);

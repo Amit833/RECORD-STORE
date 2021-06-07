@@ -6,18 +6,20 @@ const config = {
 
 const devConfig = {
   db: env.DB_CONNECTION_DEV,
-  jwt_key: env.JWT_KEY_DEV,
+  jwt_key: env.SECRET_KEY_DEV,
   frontendOrigin: env.FRONTEND_ORIGIN_DEV,
-  email: env.EMAIL,
-  email_pass: env.EMAIL_PASS,
+  stripe_key: env.STRIPE_KEY,
+  stripe_secret: env.STRIPE_SECRET,
+  send_grid_key: env.SEND_GRID_KEY_DEV,
 };
 
 const prodConfig = {
-  db: env.DB_CONNECTION_DEV,
-  jwt_key: env.JWT_KEY_PROD,
+  db: env.DB_CONNECTION_PROD,
+  jwt_key: env.SECRET_KEY_PROD,
   frontendOrigin: env.FRONTEND_ORIGIN_PROD,
-  email: env.EMAIL,
-  email_pass: env.EMAIL_PASS,
+  stripe_key: env.STRIPE_KEY_PROD,
+  stripe_secret: env.STRIPE_SECRET_PROD,
+  send_grid_key: env.SEND_GRID_KEY_PROD,
 };
 
 const currentConfig = config.env === "production" ? prodConfig : devConfig;

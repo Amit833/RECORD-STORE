@@ -14,8 +14,11 @@ exports.login = async (req, res, next) => {
 
     //now compare hashed password
     const passwordMatched = bcrypt.compareSync(password, userFound.password);
+    if (!passwordMatched) {
+      return next(customError("Invalid Credentials!", 401));
+    }
 
-    // Generate a token
+    // if password matched Generate a token
     const token = userFound.generateAuthToken();
 
     // put the token in the response

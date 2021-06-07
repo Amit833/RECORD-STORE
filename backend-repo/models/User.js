@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const env = require("../config/config");
 
 const UserSchema = new Schema(
   {
@@ -38,10 +39,7 @@ UserSchema.pre("save", async function (next) {
 UserSchema.methods.generateAuthToken = function () {
   console.log(this); // user
   const user = this;
-  const ourSuperSecretKey = process.env.SECRET_KEY;
-  const token = jwt
-    .sign({ _id: user._id.toString() }, ourSuperSecretKey)
-    .toString();
+  const token = jwt.sign({ _id: user._id.toString() }, env.jwt_key).toString();
 
   return token;
 };

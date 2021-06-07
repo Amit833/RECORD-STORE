@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 8080;
 const cors = require("cors");
+const path = require("path");
 
 const recordsRouter = require("./routes/recordsRouter");
 const usersRouter = require("./routes/usersRouter");
@@ -12,7 +13,8 @@ const logoutRouter = require("./routes/logout");
 const meRouter = require("./routes/meRouter");
 const paymentRouter = require("./routes/payment");
 const mailRouter = require("./routes/mailRouter");
-const path = require("path");
+const env = require("./config/config");
+
 // connect to MongoDB
 require("./helpers/db-connection");
 
@@ -25,7 +27,7 @@ app.listen(port, () => {
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.FRONTEND_ORIGIN || "http://localhost:3000",
+    origin: env.frontendOrigin || "http://localhost:3000",
     credentials: true, // allow cookies from your origins
   })
 );

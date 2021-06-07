@@ -40,6 +40,8 @@ exports.addUser = async (req, res, next) => {
     // Generate a token
     const token = user.generateAuthToken();
 
+    user.avatar = `${req.protocol}://${req.get("host")}${user.avatar}`;
+
     res
       .cookie("token", token, {
         expires: new Date(Date.now() + 604800000),
