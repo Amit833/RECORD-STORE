@@ -11,10 +11,11 @@ exports.getUser = async (req, res, next) => {
     const user = await User.findById(id);
 
     // user.avatar = `${req.protocol}://${req.get("host")}${user.avatar}`;
+
     // new changes
     console.log("userrrrrrrrr========", user);
-    userAVtr = user.avatar.slice(-1, -11);
-    console.log("userAV====", userAV);
+    userAV = user.avatar.slice(-1, -11);
+    console.log("userAVTR====", userAV);
 
     res.json(user);
   } catch (err) {
