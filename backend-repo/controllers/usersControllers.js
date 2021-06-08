@@ -9,8 +9,13 @@ exports.getUser = async (req, res, next) => {
   const { id } = req.params;
   try {
     const user = await User.findById(id);
-    user.avatar = `${req.protocol}://${req.get("host")}${user.avatar}`;
-    //                localhost    ://8080             /images/avatar1.jpg
+
+    // user.avatar = `${req.protocol}://${req.get("host")}${user.avatar}`;
+    // new changes
+    console.log("userrrrrrrrr========", user);
+    userAVtr = user.avatar.slice(-1, -11);
+    console.log("userAV====", userAV);
+
     res.json(user);
   } catch (err) {
     next(err);
@@ -36,6 +41,7 @@ exports.addUser = async (req, res, next) => {
   const info = req.body;
   try {
     const user = await User.create(info);
+    console.clear();
 
     // Generate a token
     const token = user.generateAuthToken();
@@ -72,16 +78,3 @@ exports.deleteUser = async (req, res, next) => {
 exports.authUser = (req, res) => {
   res.json(req.user); // inside the req.user we have token
 };
-
-// why this function
-// exports.getme = async (req, res, next) => {
-//   const { id } = req.params;
-//   try {
-//     const user = await User.findById(id);
-//     user.avatar = `${req.protocol}://${req.get("host")}${user.avatar}`;
-//     //                localhost    ://8080             /images/avatar1.jpg
-//     res.json(user);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
