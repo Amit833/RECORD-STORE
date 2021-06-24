@@ -10,11 +10,7 @@ const validateSchema = (req, res, next) => {
     password: Joi.string().min(6).required(),
   });
 
-  console.log("schema=", schema);
-
   const { error, value } = schema.validate(data);
-  console.log("validationError", error);
-  console.log("validatevalue", value);
   if (error) next(error);
   next();
 };

@@ -31,6 +31,7 @@ const UpdateProfile = () => {
 
   const updateAvatar = async (e) => {
     const code = e.target.dataset.name;
+    console.log("Code", code);
     const data = { avatar: `/images/${code}.jpg` };
     const updateUser = await updateUserProfile(data, loginUser._id);
     console.log("this is data", data);
@@ -45,8 +46,8 @@ const UpdateProfile = () => {
       <div className="profile-form-wrapper">
         <div className="profile-form-inner-wrapper">
           {loginUser.nickName && <h2>Your profile, {loginUser.nickName}.</h2>}
-          <h3>Don’t forget to click the save button Before you are gone!</h3>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <h3>Don’t forget to click the save button!</h3>
+          <form onSubmit={handleSubmit(onSubmit)} className="updateForm">
             <div className="namesWrapper">
               <input
                 className="names"
@@ -71,10 +72,6 @@ const UpdateProfile = () => {
               ref={register({ required: true })}
               defaultValue={loginUser.email}
             />
-
-            <div className="error-message">
-              {errors.email && <span>{errors.email.message}</span>}
-            </div>
 
             <input
               className="long-inputs"

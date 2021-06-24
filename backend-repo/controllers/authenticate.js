@@ -2,20 +2,16 @@ const User = require("../models/User");
 const customError = require("../helpers/customError");
 const bcrypt = require("bcryptjs");
 
+const { getAvatarUrl } = require("../helpers/getAvatarUrl");
+
 exports.login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const userFound = await User.findOne({ email });
 
     if (!userFound) return next(customError("user not found!", 401));
-    // userFound.avatar = `${req.protocol}://${req.get("host")}${
-    //   userFound.avatar
-    // }`;
-
-    // new changes
-    userFound.avatar = userFound.avatar.slice(-1, -11);
-    console.log("userAV", userFound.avatar);
-    userFound.avatar;
+    userFound.avatar = getAvatarUrl(req, userFound);
+    console.log("userFoundddddd", userFound);
 
     //now compare hashed password
     const passwordMatched = bcrypt.compareSync(password, userFound.password);

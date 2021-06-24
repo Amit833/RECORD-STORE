@@ -6,7 +6,7 @@ import { logoutUser } from "../helpers/apiCall";
 import { clearUserInStorage } from "../helpers/localStorage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-
+import image1 from "../images/avatar1.jpg";
 import "../css/nav.css";
 
 const Nav = () => {
@@ -19,12 +19,14 @@ const Nav = () => {
     setCartCounter,
     setCart,
   } = context;
+  console.log("lVVV", loginUser);
+
   let { id } = useParams();
   const history = useHistory();
 
   const fetchLoginData = () => {
+    console.log("fetchLogin is triggered!");
     history.push(`/profile/${loginUser._id}`);
-    // loginUser.id
   };
 
   const triggerLogout = () => {

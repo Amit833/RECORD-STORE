@@ -40,20 +40,14 @@ h3 {
   margin-right: 2%;
 }
 
-input[type="text"] {
-  border-style: none;
-  border-bottom: 2px solid grey;
-  margin-bottom: 10%;
-}
-
 input:focus {
   border-style: none;
 }
 
-input[type="text" i] {
-  font-size: 16px;
-  font-weight: bold;
-  color: #919191;
+.updateForm input {
+  color: #2e2d2d;
+  margin-bottom: 8px;
+  margin-top: 20px;
 }
 
 .namesWrapper {

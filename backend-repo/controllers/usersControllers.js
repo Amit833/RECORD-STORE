@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const { getAvatarUrl } = require("../helpers/getAvatarUrl");
 
 exports.getUsers = async (req, res, next) => {
   const users = await User.find().sort({ firstName: 1 });
@@ -10,12 +11,7 @@ exports.getUser = async (req, res, next) => {
   try {
     const user = await User.findById(id);
 
-    // user.avatar = `${req.protocol}://${req.get("host")}${user.avatar}`;
-
-    // new changes
-    console.log("userrrrrrrrr========", user);
-    userAV = user.avatar.slice(-1, -11);
-    console.log("userAVTR====", userAV);
+    user.avatar = getAvatarUrl(req, user);
 
     res.json(user);
   } catch (err) {
@@ -29,9 +25,9 @@ exports.updateUser = async (req, res, next) => {
     const userUpdated = await User.findByIdAndUpdate(id, req.body, {
       new: true,
     });
-    userUpdated.avatar = `${req.protocol}://${req.get("host")}${
-      userUpdated.avatar
-    }`;
+    console.log("updatedUserrrrr", userUpdated);
+    userUpdated.avatar = getAvatarUrl(req, userUpdated);
+
     res.json(userUpdated);
   } catch (err) {
     next(err);
@@ -42,12 +38,10 @@ exports.addUser = async (req, res, next) => {
   const info = req.body;
   try {
     const user = await User.create(info);
-    console.clear();
+    user.avatar = getAvatarUrl(req, user);
 
     // Generate a token
     const token = user.generateAuthToken();
-
-    user.avatar = `${req.protocol}://${req.get("host")}${user.avatar}`;
 
     res
       .cookie("token", token, {

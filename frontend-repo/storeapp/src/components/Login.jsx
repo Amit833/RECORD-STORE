@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import logIn from "../images/logIn.png";
 import { addLoginData } from "../helpers/apiCall";
@@ -19,18 +19,18 @@ const Login = () => {
     setError,
     updateCartState,
   } = context;
-
+  console.log("login triggered!");
   const onSubmit = async (data) => {
     const newData = await addLoginData(data);
+    console.log("NEWDATA", newData);
 
     if (newData.error) {
       setError(true);
       return;
     }
-    console.log("newdataid", newData.data._id);
     setloginUser(newData.data);
     setUserInStorage(newData.data);
-    const cartTols = loadUserCart(newData.data._id); // i add the loginUser id to loadUserCart
+    const cartTols = loadUserCart(newData.data?._id); // i add the loginUser id to loadUserCart
     cartTols && updateCartState(cartTols);
 
     history.push("/store");
@@ -41,22 +41,33 @@ const Login = () => {
       <div className="login-text-wrapper">
         <h2>Welcome back!!</h2>
         <h3>Please fill in your credentials.</h3>
-        {error && <h1 style={{ color: "red" }}>Login Error </h1>}
-        <form onSubmit={handleSubmit(onSubmit)} className="myForm">
+        {error && <h1 style={{ color: "red" }}>Login failed ! </h1>}
+
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="myForm"
+          autoComplete="off"
+        >
           <input
-            type="text"
+            type="email"
             name="email"
             ref={register({ required: true })}
             placeholder="Email"
           />
-          {errors.email && <p>please provide your valid email!</p>}
+
+          <div className="error-message">
+            {errors.email && <small>Please provide your email!</small>}
+          </div>
+
           <input
             type="password"
             name="password"
             ref={register({ required: true })}
             placeholder="Password"
           />
-          {errors.password && <p>please provide your password!</p>}
+          <div className="error-message">
+            {errors.password && <small>Please provide your password!</small>}
+          </div>
 
           <button className="login-btn">Log in</button>
           <p>You don’t have an account?</p>

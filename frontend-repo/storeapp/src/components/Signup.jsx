@@ -20,11 +20,11 @@ const Signup = () => {
       return;
     }
 
-    // setSignup(user.data);
     setloginUser(user.data);
     setUserInStorage(user.data);
     history.push("/store");
   };
+  console.log("signup loaded!");
 
   return (
     <>
@@ -32,40 +32,66 @@ const Signup = () => {
         <div className="text-wrapper">
           <h2>Hurrraaaaay! Let us know who you are!</h2>
           <h3>We won’t share you info with anybody. I promise.</h3>
-          <form onSubmit={handleSubmit(onSubmit)} className="myForm">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="myForm"
+            autoComplete="off"
+          >
             <input
               id="firstName"
               type="text"
               name="firstName"
               ref={register({ required: true })}
               placeholder="First name"
+              autoComplete="none"
             />
+            <div className="error-message">
+              {errors.firstName && (
+                <small>Please provide your first name!</small>
+              )}
+            </div>
+
             <input
               id="lastName"
               type="text"
               name="lastName"
               ref={register({ required: true })}
               placeholder="Last name"
+              autoComplete="none"
             />
+            <div className="error-message">
+              {errors.lastName && <small>Please provide your last name!</small>}
+            </div>
+
             <input
-              type="text"
+              type="email"
               name="email"
               ref={register({ required: true })}
               placeholder="Email"
             />
-            {errors.email && <p>please provide your valid email!</p>}
+            <div className="error-message">
+              {errors.email && <small>Please provide your email!</small>}
+            </div>
+
             <input
               type="text"
               name="nickName"
               ref={register({ required: true })}
               placeholder="Nickname"
             />
+            <div className="error-message">
+              {errors.nickName && <small>Please provide your nickname!</small>}
+            </div>
+
             <input
               type="password"
               name="password"
               ref={register({ required: true })}
               placeholder="Password"
             />
+            <div className="error-message">
+              {errors.password && <small>Please provide your password!</small>}
+            </div>
 
             <input
               type="password"
@@ -73,6 +99,9 @@ const Signup = () => {
               ref={register({ required: true })}
               placeholder="Repeat password"
             />
+            <div className="error-message">
+              {errors.email && <small>Please provide your password!</small>}
+            </div>
             <button className="signup-btn">sign Up</button>
           </form>
         </div>

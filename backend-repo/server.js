@@ -46,6 +46,7 @@ app.use("/sendmail", mailRouter);
 
 // Error Handling
 app.use(function errorHandler(err, req, res, next) {
+  console.log("centralerr", err);
   res.status(err.status || 500).send({
     error: {
       message: err.message,
